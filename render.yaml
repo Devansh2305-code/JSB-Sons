@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: jsb-sons-backend
+    runtime: node
+    plan: free
+    region: singapore
+    branch: main
+    autoDeploy: true
+    buildCommand: npm ci --include=dev && npm run build --workspace=@dtc/backend
+    startCommand: npm run start --workspace=@dtc/backend
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.22.3
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: AUTH_MFA_ENCRYPTION_KEY
+        generateValue: true
+      - key: STORE_CORS
+        value: http://localhost:3000
+      - key: ADMIN_CORS
+        value: http://localhost:9000
+      - key: AUTH_CORS
+        value: http://localhost:9000

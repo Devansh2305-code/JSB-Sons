@@ -1,0 +1,13 @@
+{
+  "name": "@jsb/local-db",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/start.mjs",
+    "stop": "node ./src/stop.mjs"
+  },
+  "dependencies": {
+    "embedded-postgres": "17.10.0-beta.17"
+  }
+}
