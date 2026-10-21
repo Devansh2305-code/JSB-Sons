@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "medusa build",
-    "start": "medusa start",
+    "start": "cd .medusa/server && medusa start",
     "dev": "medusa develop",
     "seed": "medusa exec ./src/scripts/seed-jsb.ts",
     "sync:sheets": "medusa exec ./src/scripts/sync-orders-to-sheet.ts",
