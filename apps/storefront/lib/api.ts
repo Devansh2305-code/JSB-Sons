@@ -54,7 +54,8 @@ export function storeHeaders(): Record<string, string> {
 
 export async function storeFetch<T>(
   path: string,
-  init?: RequestInit
+  init?: RequestInit,
+  revalidate?: number
 ): Promise<T> {
   const response = await fetch(`${MEDUSA_BACKEND_URL}${path}`, {
     ...init,
@@ -63,7 +64,9 @@ export async function storeFetch<T>(
       ...(init?.body ? { "content-type": "application/json" } : {}),
       ...init?.headers,
     },
-    cache: "no-store",
+    ...(revalidate === undefined
+      ? { cache: "no-store" as RequestCache }
+      : { next: { revalidate } }),
   })
 
   if (!response.ok) {
@@ -84,12 +87,14 @@ function normaliseVariant(variant: StoreVariant): StoreVariant {
 export async function getCatalog(): Promise<StoreProduct[]> {
   const [productData, metaData, stockData] = await Promise.all([
     storeFetch<ProductResponse>(
-      `/store/products?limit=100&fields=${encodeURIComponent(PRODUCT_FIELDS)}`
+      `/store/products?limit=100&fields=${encodeURIComponent(PRODUCT_FIELDS)}`,
+      undefined,
+      300
     ),
-    storeFetch<MetaResponse>("/store/jsb/meta").catch(
+    storeFetch<MetaResponse>("/store/jsb/meta", undefined, 600).catch(
       (): MetaResponse => ({ products: [] })
     ),
-    storeFetch<StockResponse>("/store/jsb/stock").catch(
+    storeFetch<StockResponse>("/store/jsb/stock", undefined, 30).catch(
       (): StockResponse => ({ stock: {} })
     ),
   ])
@@ -145,8 +150,7 @@ export async function getProduct(
   return catalog.find((product) => product.handle === handle) ?? null
 }
 
-export async function getCategories(): Promise<StoreCategory[]> {
-  const catalog = await getCatalog()
+export function getCategories(catalog: StoreProduct[]): StoreCategory[] {
   const categories = new Map<string, StoreCategory>()
 
   for (const product of catalog) {
@@ -165,7 +169,11 @@ export async function getCategories(): Promise<StoreCategory[]> {
 }
 
 export async function getRegionId(): Promise<string> {
-  const data = await storeFetch<RegionResponse>("/store/regions")
+  const data = await storeFetch<RegionResponse>(
+    "/store/regions",
+    undefined,
+    3600
+  )
   const indianRegion = data.regions.find(
     (region) =>
       region.currency_code === "inr" ||

@@ -30,7 +30,8 @@ const marquee = [
 ]
 
 export default async function HomePage() {
-  const [catalog, categories] = await Promise.all([getCatalog(), getCategories()])
+  const catalog = await getCatalog()
+  const categories = getCategories(catalog)
   const newArrivals = catalog.filter((product) => product.metadata?.is_new)
   const featured = (newArrivals.length >= 4 ? newArrivals : catalog).slice(0, 4)
   const occasion =

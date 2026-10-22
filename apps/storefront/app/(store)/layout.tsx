@@ -3,6 +3,8 @@ import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { getRegionId } from "@/lib/api"
 
+export const dynamic = "force-dynamic"
+
 export default async function StoreLayout({
   children,
 }: {

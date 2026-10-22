@@ -26,7 +26,8 @@ export default async function ShopPage({
 }: {
   searchParams: ShopSearchParams
 }) {
-  const [catalog, categories] = await Promise.all([getCatalog(), getCategories()])
+  const catalog = await getCatalog()
+  const categories = getCategories(catalog)
   const activeCategory = first(searchParams.category)
   const query = first(searchParams.q)
   const sort = first(searchParams.sort) || "featured"
