@@ -225,6 +225,20 @@
   padding: 17px 0;
   border-bottom: 1px solid var(--line);
   background: var(--paper-deep);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 42px,
+    #000 calc(100% - 42px),
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 42px,
+    #000 calc(100% - 42px),
+    transparent
+  );
 }
 
 .marquee-track {

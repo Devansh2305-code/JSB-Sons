@@ -1331,6 +1331,23 @@
   }
 }
 
+@media (max-width: 900px) {
+  .admin-table-wrap::before {
+    content: "Swipe to see all columns →";
+    position: sticky;
+    left: 0;
+    display: block;
+    width: max-content;
+    padding-bottom: 9px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 620px) {
   .admin-topbar {
     align-items: flex-start;

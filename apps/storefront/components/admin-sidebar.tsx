@@ -12,6 +12,9 @@ const links = [
   { href: "/admin/database", label: "Database" },
 ]
 
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ?? "http://localhost:9000"
+
 export function AdminSidebar({ unreadCount }: { unreadCount: number }) {
   const pathname = usePathname()
   const router = useRouter()
@@ -52,7 +55,7 @@ export function AdminSidebar({ unreadCount }: { unreadCount: number }) {
         <Link href="/" target="_blank">
           View storefront
         </Link>
-        <a href="http://localhost:9000/app" target="_blank" rel="noreferrer">
+        <a href={`${BACKEND_URL}/app`} target="_blank" rel="noreferrer">
           Full Medusa admin
         </a>
         <button type="button" onClick={logout}>

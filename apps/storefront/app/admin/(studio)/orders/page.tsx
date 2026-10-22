@@ -85,7 +85,7 @@ export default async function AdminOrdersPage({
           type="search"
           name="q"
           defaultValue={q}
-          placeholder="Search order number, email or customer"
+          placeholder="Order no. or email"
           aria-label="Search orders"
         />
         <button type="submit" className="button">

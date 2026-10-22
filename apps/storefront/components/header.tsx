@@ -93,6 +93,8 @@ export function Header() {
               className="nav-menu-button"
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
+              aria-expanded={menuOpen}
+              aria-controls="site-menu"
             >
               <MenuIcon />
             </button>
@@ -117,6 +119,8 @@ export function Header() {
               className="nav-icon-button nav-search"
               onClick={() => setSearchOpen(true)}
               aria-label="Search"
+              aria-expanded={searchOpen}
+              aria-controls="site-search"
             >
               <SearchIcon />
               <span>Search</span>
@@ -134,7 +138,13 @@ export function Header() {
         </div>
       </header>
 
-      <div className={`search-panel ${searchOpen ? "is-open" : ""}`}>
+      <div
+        className={`search-panel ${searchOpen ? "is-open" : ""}`}
+        id="site-search"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search products"
+      >
         <button
           type="button"
           className="overlay-close"
@@ -150,7 +160,7 @@ export function Header() {
               autoFocus={searchOpen}
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="What are you looking for?"
+              placeholder="What are you after?"
               aria-label="Search products"
             />
             <button type="submit" aria-label="Submit search">
@@ -174,7 +184,13 @@ export function Header() {
         </div>
       </div>
 
-      <div className={`mobile-menu ${menuOpen ? "is-open" : ""}`}>
+      <div
+        className={`mobile-menu ${menuOpen ? "is-open" : ""}`}
+        id="site-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+      >
         <div className="mobile-menu-top">
           <span className="eyebrow">JSB Sons · Gurugram</span>
           <button

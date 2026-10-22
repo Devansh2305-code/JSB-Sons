@@ -319,7 +319,7 @@ export default async function HomePage() {
       </section>
 
       <section className="occasion-section">
-        <div className="occasion-copy">
+        <Reveal className="occasion-copy">
           <span className="eyebrow" style={{ color: "rgba(242,236,224,.55)" }}>
             The occasion edit
           </span>
@@ -337,8 +337,8 @@ export default async function HomePage() {
           >
             Enter the evening <ArrowRightIcon />
           </Link>
-        </div>
-        <div className="occasion-image">
+        </Reveal>
+        <Reveal className="occasion-image" delay={140}>
           <Image
             src="/products/13153053.jpg"
             alt="The Occasion Edit"
@@ -349,31 +349,31 @@ export default async function HomePage() {
             <span>{occasion?.title ?? "Blue Hour Gown"}</span>
             <span>Look 06 / Party</span>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <div className="service-strip">
-        <div className="service-item">
+        <Reveal className="service-item">
           <TruckIcon />
           <div>
             <strong>Sent with care</strong>
             <p>Free shipping over ₹4,999. Dispatched within 24–48 hours.</p>
           </div>
-        </div>
-        <div className="service-item">
+        </Reveal>
+        <Reveal className="service-item" delay={110}>
           <ReturnIcon />
           <div>
             <strong>Seven-day returns</strong>
             <p>Changed your mind? Send it back within seven days.</p>
           </div>
-        </div>
-        <div className="service-item">
+        </Reveal>
+        <Reveal className="service-item" delay={220}>
           <ShieldIcon />
           <div>
             <strong>Made to last</strong>
             <p>Considered fabrics, honest construction, GST invoice included.</p>
           </div>
-        </div>
+        </Reveal>
       </div>
     </>
   )
