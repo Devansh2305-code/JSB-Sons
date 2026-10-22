@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import { Archivo, Bodoni_Moda, IBM_Plex_Mono } from "next/font/google"
+import { resolveSiteUrl } from "@/lib/site-url"
 import "./globals.css"
 
 const display = Bodoni_Moda({
@@ -24,9 +25,7 @@ const mono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
-  ),
+  metadataBase: resolveSiteUrl(),
   title: {
     default: "JSB Sons — Clothes for the life you're building",
     template: "%s · JSB Sons",

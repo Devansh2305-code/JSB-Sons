@@ -1,3 +1,3 @@
-export const secureCookies = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? ""
-).startsWith("https://")
+import { resolveSiteUrl } from "@/lib/site-url"
+
+export const secureCookies = resolveSiteUrl().protocol === "https:"

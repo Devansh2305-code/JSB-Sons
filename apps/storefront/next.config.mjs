@@ -1,6 +1,19 @@
 /** @type {import('next').NextConfig} */
-const backendUrl = new URL(
-  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ?? "http://localhost:9000"
+
+function resolveUrl(value, fallback) {
+  const raw = (value ?? "").trim()
+  if (!raw) return new URL(fallback)
+
+  try {
+    return new URL(/^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? raw : `https://${raw}`)
+  } catch {
+    return new URL(fallback)
+  }
+}
+
+const backendUrl = resolveUrl(
+  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL,
+  "http://localhost:9000"
 )
 
 const backendImageSource = {
